@@ -74,7 +74,9 @@ public class CameraEngine: NSObject {
     let cameraInput = CameraEngineDeviceInput()
     let cameraMetadata = CameraEngineMetadataOutput()
     let cameraGifEncoder = CameraEngineGifEncoder()
-    let capturePhotoSettings = AVCapturePhotoSettings()
+    var capturePhotoSettings: AVCapturePhotoSettings {
+        return AVCapturePhotoSettings()
+    }
     var captureDeviceIntput: AVCaptureDeviceInput?
     
     var sessionQueue: DispatchQueue = DispatchQueue(label: cameraEngineSessionQueueIdentifier)
@@ -392,9 +394,9 @@ public class CameraEngine: NSObject {
             if let currentDevice = self.cameraDevice.currentDevice {
                 try self.cameraInput.configureInputCamera(self.session, device: currentDevice)
             }
-            if let micDevice = self.cameraDevice.micCameraDevice {
-                try self.cameraInput.configureInputMic(self.session, device: micDevice)
-            }
+//            if let micDevice = self.cameraDevice.micCameraDevice {
+//                try self.cameraInput.configureInputMic(self.session, device: micDevice)
+//            }
         }
         catch CameraEngineDeviceInputErrorType.unableToAddCamera {
             fatalError("[CameraEngine] unable to add camera as InputDevice")

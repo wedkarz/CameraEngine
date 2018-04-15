@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E691C11520828FC50031EB40"
+            BuildableName = "PhotoKiosk.app"
+            BlueprintName = "PhotoKiosk"
+            ReferencedContainer = "container:../PhotoKiosk.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -42,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BBE9B7B61D8C41D1009F2670"
-            BuildableName = "CameraEngine.framework"
-            BlueprintName = "CameraEngine"
-            ReferencedContainer = "container:CameraEngine.xcodeproj">
+            BlueprintIdentifier = "E691C11520828FC50031EB40"
+            BuildableName = "PhotoKiosk.app"
+            BlueprintName = "PhotoKiosk"
+            ReferencedContainer = "container:../PhotoKiosk.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
