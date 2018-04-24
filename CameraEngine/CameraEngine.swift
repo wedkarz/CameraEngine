@@ -103,7 +103,7 @@ public class CameraEngine: NSObject {
         }
     }
     
-    public lazy var previewLayer: AVCaptureVideoPreviewLayer! = {
+    public lazy var previewLayer: AVCaptureVideoPreviewLayer? = {
         let layer =  AVCaptureVideoPreviewLayer(session: self.session)
         layer?.videoGravity = AVLayerVideoGravityResizeAspectFill
         return layer
@@ -301,8 +301,12 @@ public class CameraEngine: NSObject {
 			if (!UIDevice.current.isGeneratingDeviceOrientationNotifications) {
 				UIDevice.current.beginGeneratingDeviceOrientationNotifications()
 			}
+            
+            self.previewLayer?.connection?.videoOrientation = .landscapeRight // default with home on right side
+//            self.previewLayer?.setAffineTransform(CGAffineTransform(scaleX: -1.0, y: 1.0))
+            
             NotificationCenter.default.addObserver(forName: NSNotification.Name.UIDeviceOrientationDidChange, object: nil, queue: OperationQueue.main) { (_) -> Void in
-                self.previewLayer.connection.videoOrientation = AVCaptureVideoOrientation.orientationFromUIDeviceOrientation(UIDevice.current.orientation)
+                self.previewLayer?.connection.videoOrientation = AVCaptureVideoOrientation.orientationFromUIDeviceOrientation(UIDevice.current.orientation)
             }
         }
         else {
@@ -425,7 +429,7 @@ public extension CameraEngine {
 			let performFocus = currentDevice.isFocusModeSupported(.autoFocus) && currentDevice.isFocusPointOfInterestSupported
 			let performExposure = currentDevice.isExposureModeSupported(.autoExpose) && currentDevice.isExposurePointOfInterestSupported
             if performFocus || performExposure {
-                let focusPoint = self.previewLayer.captureDevicePointOfInterest(for: atPoint)
+                guard let focusPoint = self.previewLayer?.captureDevicePointOfInterest(for: atPoint) else { return }
                 do {
                     try currentDevice.lockForConfiguration()
 					
